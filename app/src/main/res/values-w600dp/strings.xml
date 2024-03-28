@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="admin">Admin</string>
-    <string name="login">Login</string>
-    <string name="password">Password</string>
-    <string name="email">Email</string>
     <string name="dashboard">Dashboard</string>
     <string name="workers">Workers</string>
     <string name="more">More options</string>
