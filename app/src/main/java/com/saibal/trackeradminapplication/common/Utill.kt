@@ -10,13 +10,15 @@ class Utill {
 
 
     companion object{
-
         public var SHARED_PREF:String = "shared_pref"
         public var ADMIN_STORE_KEY = "admin_store_key"
+        public var ADMIN_NAME_STORE_KEY = "admin_name_store_key"
+        public var ADMIN_EMAIL_STORE_KEY = "admin_email_store_key"
+        public var WORKER_STORE_KEY = "worker_store_key"
         public var ADMIN_INTENT_KEY = "admin_intent_key"
         public var READ_FROM_SHARED_PREF = "READ_FROM_SHARED_PREF"
         public var WRITE_TO_SHARED_PREF = "WRITE_TO_SHARED_PREF"
-        public var MY_IP = "192.168.1.3"
+        public var MY_IP = "192.168.1.15"
         public var BASE_URL = "http://$MY_IP:5000/api/admin"
 
         fun handleSharedPref(context: Context, sharedPreferences: SharedPreferences, type:String, data:String):String?{

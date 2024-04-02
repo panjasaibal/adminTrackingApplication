@@ -6,9 +6,37 @@
     tools:context=".admin.ui.WorkersFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:orientation="vertical">
+
+        <SearchView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/workers_list"
+            android:textSize="22sp"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:background="@drawable/bg_purple"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_marginTop="2dp"
+            android:padding="10dp"
+            android:id="@+id/workerRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </LinearLayout>
+
 
 </FrameLayout>

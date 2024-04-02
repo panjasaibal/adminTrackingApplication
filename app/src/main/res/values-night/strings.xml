@@ -7,4 +7,6 @@
     <string name="dashboard">Dashboard</string>
     <string name="workers">Workers</string>
     <string name="more">More options</string>
+    <string name="welcome">Welcome</string>
+    <string name="workers_list">Workers List</string>
 </resources>
