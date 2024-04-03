@@ -31,9 +31,7 @@ class WorkerAdapter(
             val customlayout:View = LayoutInflater.from(context).inflate(R.layout.worker_detail_layout, null)
             customlayout.findViewById<TextView>(R.id.worker_details_name_tv).text = currentWorker.name
             customlayout.findViewById<TextView>(R.id.worker_details_phone_tv).text = currentWorker.phone
-            customlayout.findViewById<Button>(R.id.backBtn).setOnClickListener {
 
-            }
             builder.setView(customlayout)
             builder.setPositiveButton("Yes",
                 DialogInterface.OnClickListener { dialog: DialogInterface?, which: Int ->
