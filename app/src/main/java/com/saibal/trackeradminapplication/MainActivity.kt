@@ -79,7 +79,7 @@ class MainActivity : AppCompatActivity() {
                         var jsonObject = response?.getJSONObject("result")
                         val toDoJson:String = jsonObject.toString();
                         Log.i("todoJson", toDoJson)
-                        Toast.makeText(applicationContext,toDoJson,Toast.LENGTH_LONG).show()
+                       // Toast.makeText(applicationContext,toDoJson,Toast.LENGTH_LONG).show()
                         var gson:Gson = Gson()
                         var admin: Admin = gson.fromJson(toDoJson, Admin::class.java)
                         var intent: Intent = Intent(applicationContext, PanelActivity::class.java)
