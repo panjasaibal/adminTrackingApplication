@@ -33,7 +33,7 @@ class WorkerAdapter(
             customlayout.findViewById<TextView>(R.id.worker_details_phone_tv).text = currentWorker.phone
 
             builder.setView(customlayout)
-            builder.setPositiveButton("Yes",
+            builder.setPositiveButton("Ok",
                 DialogInterface.OnClickListener { dialog: DialogInterface?, which: Int ->
                     // When the user click yes button then app will close
                     dialog?.cancel()
