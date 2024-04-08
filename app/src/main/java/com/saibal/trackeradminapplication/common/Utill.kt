@@ -18,9 +18,10 @@ class Utill {
         public var ADMIN_INTENT_KEY = "admin_intent_key"
         public var READ_FROM_SHARED_PREF = "READ_FROM_SHARED_PREF"
         public var WRITE_TO_SHARED_PREF = "WRITE_TO_SHARED_PREF"
-        public var MY_IP = "192.168.1.11"
+        public var MY_IP = "192.168.1.7"
         public var BASE_URL = "http://$MY_IP:5000/api/admin"
         public var JSONARRAY_STORE_KEY = "json_array_store_key"
+        public var JSONARRAY_OF_TRACKER_STORE_KEY = "json_array_of_tracker_store_key"
 
         fun handleSharedPref(context: Context, sharedPreferences: SharedPreferences, type:String, data:String):String?{
             //sharedPreferences = context.getSharedPreferences(SHARED_PREF,Context.MODE_PRIVATE)

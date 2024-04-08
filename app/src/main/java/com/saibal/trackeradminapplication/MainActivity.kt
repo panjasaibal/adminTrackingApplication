@@ -3,7 +3,9 @@ package com.saibal.trackeradminapplication
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -39,22 +41,22 @@ class MainActivity : AppCompatActivity() {
     private lateinit var loginBtn:Button
     private lateinit var emailEdtText:TextInputEditText
     private lateinit var passwdEdtText:TextInputEditText
+    private lateinit var errorMessageTv:TextView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
-
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-
         requestQueue = Volley.newRequestQueue(this)
         loginBtn = findViewById(R.id.login_btn);
         emailEdtText = findViewById(R.id.email_edit_text)
         passwdEdtText = findViewById(R.id.password_edit_text)
+        errorMessageTv = findViewById(R.id.errMessageTv)
         loginBtn.setOnClickListener {
             login(emailEdtText.text.toString(), passwdEdtText.text.toString())
         }
@@ -62,10 +64,6 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun login(email:String,password:String){
-        //Toast.makeText(applicationContext,"clicked",Toast.LENGTH_SHORT).show()
-
-
-            Toast.makeText(applicationContext, email, Toast.LENGTH_SHORT).show()
 
 
             val url = Utill.BASE_URL+"/loginadmin";
@@ -75,6 +73,7 @@ class MainActivity : AppCompatActivity() {
                 Request.Method.POST, url, JSONObject(params),object: Response.Listener<JSONObject?> {
                 override fun onResponse(response: JSONObject?) {
                     Log.d("called", "post api called")
+                    errorMessageTv.visibility = View.INVISIBLE
                     try {
                         var jsonObject = response?.getJSONObject("result")
                         val toDoJson:String = jsonObject.toString();
@@ -90,7 +89,7 @@ class MainActivity : AppCompatActivity() {
                         startActivity(intent)
 
                     }catch(e: JSONException){
-
+                        Log.d("err", e.stackTraceToString())
                     }
                 }
             },
@@ -98,13 +97,14 @@ class MainActivity : AppCompatActivity() {
                     override fun onErrorResponse(error: VolleyError?) {
 
                         var response: NetworkResponse? = error?.networkResponse
+                        errorMessageTv.visibility = View.VISIBLE
                         try{
                             Log.i("error",error?.networkResponse?.statusCode.toString())
                             var logMessage = response?.data?.decodeToString()
                             var errJsonMsg  = JSONObject(logMessage)
-
                             Log.i("errorMSG",logMessage.toString())
-                            //errorMessageTv.text = errJsonMsg.getString("error")
+                            Toast.makeText(applicationContext, errJsonMsg.get("error").toString(), Toast.LENGTH_SHORT).show()
+                            errorMessageTv.text = errJsonMsg.get("error").toString()
 
                         }catch (e: Exception){
                             Log.e("excep",e.localizedMessage)
@@ -121,8 +121,5 @@ class MainActivity : AppCompatActivity() {
             var policy: RetryPolicy = DefaultRetryPolicy(socketTimeout, 2, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT)
             jsonObjectRequest.setRetryPolicy(policy)
             requestQueue.add(jsonObjectRequest)
-
     }
-
-
 }

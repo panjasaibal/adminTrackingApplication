@@ -49,7 +49,10 @@ class WorkerFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         data = arguments?.getString(Utill.JSONARRAY_STORE_KEY,"").toString()
-        fetchDetailsOfWroker()
+        if(data!=""){
+            fetchDetailsOfWroker()
+        }
+
         if(workersList.size ==0){
             Toast.makeText(mContext,"save me", Toast.LENGTH_LONG).show()
         }

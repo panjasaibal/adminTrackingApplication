@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -26,6 +27,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.json.JSONArray
 import org.json.JSONException
+import org.w3c.dom.Text
 import java.util.ArrayList
 
 class WorkersFragment : Fragment() {
@@ -34,6 +36,7 @@ class WorkersFragment : Fragment() {
     private  lateinit var data:String
     var workersList= ArrayList<Worker>()
     private lateinit var recyclerView: RecyclerView
+    private lateinit var noWorkerTv:TextView
     private lateinit var mContext: Context
 
     override fun onCreateView(
@@ -41,7 +44,6 @@ class WorkersFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-
         return inflater.inflate(R.layout.fragment_workers, container, false)
     }
 
@@ -49,15 +51,21 @@ class WorkersFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         adminId = arguments?.getString(Utill.ADMIN_STORE_KEY,"").toString()
         data = arguments?.getString(Utill.JSONARRAY_STORE_KEY,"").toString()
-        fetchAllWorkers()
-        if(workersList.size ==0){
-            Toast.makeText(mContext,"Save me",Toast.LENGTH_SHORT).show()
-        }
         recyclerView = view.findViewById(R.id.workerRecyclerView)
-        recyclerView.layoutManager = LinearLayoutManager(mContext,LinearLayoutManager.VERTICAL,false)
-        var adapter = WorkerAdapter(mContext,workersList)
-        recyclerView.adapter = adapter
+        noWorkerTv = view.findViewById(R.id.noWorkerTv)
 
+        if(data!=""){
+            noWorkerTv.visibility = View.GONE
+            fetchAllWorkers()
+            recyclerView.visibility = View.VISIBLE
+        }
+        else{
+            noWorkerTv.visibility = View.VISIBLE
+            recyclerView.visibility = View.GONE
+        }
+        recyclerView.layoutManager = LinearLayoutManager(mContext,LinearLayoutManager.VERTICAL,false)
+        var adapter = WorkerAdapter(mContext,workersList,adminId)
+        recyclerView.adapter = adapter
     }
 
     override fun onAttach(context: Context) {
@@ -68,7 +76,6 @@ class WorkersFragment : Fragment() {
     private fun fetchAllWorkers(){
 
         var jsonArray: JSONArray = JSONArray(data)
-
         for(i in 0 until jsonArray.length()){
             try{
                 var jsonObject = jsonArray.getJSONObject(i)
@@ -81,6 +88,5 @@ class WorkersFragment : Fragment() {
                 Log.e("jsonexxception", e.stackTraceToString())
             }
         }
-
     }
 }

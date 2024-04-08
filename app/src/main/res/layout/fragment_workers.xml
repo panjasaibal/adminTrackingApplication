@@ -14,7 +14,7 @@
 
 
         <TextView
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="15dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/workers_list"
@@ -22,16 +22,33 @@
             android:textAlignment="center"
             android:textColor="@color/white"
             android:background="@drawable/bg_purple"
-            android:layout_marginStart="15dp"
-            android:layout_marginEnd="15dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginEnd="25dp"
             />
+
+        <TextView
+            android:id="@+id/noWorkerTv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="80dp"
+            android:layout_marginEnd="15dp"
+            android:gravity="center"
+            android:text="@string/no_workers"
+            android:textAlignment="center"
+            android:textColor="@color/delete_color"
+            android:textSize="18sp"
+            android:visibility="gone" />
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:layout_marginTop="20dp"
-            android:padding="10dp"
+            android:padding="20dp"
+            android:visibility="visible"
             android:id="@+id/workerRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
+
 
     </LinearLayout>
 

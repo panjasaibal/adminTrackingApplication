@@ -3,18 +3,29 @@ package com.saibal.trackeradminapplication.controller
 import androidx.appcompat.app.AlertDialog;
 import android.content.Context
 import android.content.DialogInterface
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.android.volley.Request
+import com.android.volley.RequestQueue
+import com.android.volley.Response
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
 import com.saibal.trackeradminapplication.R
+import com.saibal.trackeradminapplication.common.Utill
 import com.saibal.trackeradminapplication.model.Worker
+import org.json.JSONException
+import org.json.JSONObject
 
 class WorkerAdapter(
     private var context: Context,
-    private var workers:ArrayList<Worker>
+    private var workers:ArrayList<Worker>,
+    private var adminID:String
 ):RecyclerView.Adapter<WorkerAdapter.WorkerViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WorkerViewHolder {
 
@@ -44,10 +55,35 @@ class WorkerAdapter(
 
         }
         holder.deleteBtn.setOnClickListener {
+                deleteWorker(currentWorker,position)
 
         }
 
 
+    }
+
+
+    private fun deleteWorker(worker:Worker, position: Int){
+        var url = Utill.BASE_URL+"/"+adminID+"/"+worker._id
+       // Toast.makeText(context,url,Toast.LENGTH_LONG).show()
+        var requestQueue:RequestQueue = Volley.newRequestQueue(context)
+
+        var stringRequest = StringRequest(Request.Method.DELETE,url,
+            {response->
+                try{
+                    var jsonObject = JSONObject(response)
+                    var message:String = jsonObject.getString("message")
+                    Toast.makeText(context,message,Toast.LENGTH_LONG).show()
+                    workers.remove(worker)
+                    notifyItemRemoved(position)
+                }catch (e:JSONException){
+                    Log.e("err", e.message.toString())
+                }
+            }, {
+                Toast.makeText(context,"Some Error occured",Toast.LENGTH_LONG).show()
+            }
+            )
+        requestQueue.add(stringRequest)
     }
 
     override fun getItemCount(): Int {
