@@ -29,14 +29,20 @@ class TrackerAdapter(
 
         var currentTrackerResponse:TrackerResponse = trackersList.get(position)
         holder.workerTrackerNameTv.text = currentTrackerResponse.workerName
-        var time = Instant.ofEpochSecond(currentTrackerResponse.data.timestamp.toLong()).atZone(
+        var timeString = (currentTrackerResponse.data.timestamp.toLong()/1000)
+        var time = Instant.ofEpochSecond(timeString).atZone(
             ZoneId.systemDefault()).toLocalTime()
         holder.timeSyncedTv.text = time.toString()
-        var geocoder:Geocoder = Geocoder(context, Locale.getDefault())
+        if(currentTrackerResponse.data.address!=""){
+            holder.addressTv.text = currentTrackerResponse.data.address
+        }else{
+            var geocoder:Geocoder = Geocoder(context, Locale.getDefault())
 
-        val addresses = geocoder.getFromLocation( currentTrackerResponse.data.latitude.toDouble(), currentTrackerResponse.data.longitude.toDouble(), 1)
-        val address = addresses!![0].getAddressLine(0)
-        holder.addressTv.text = address
+            val addresses = geocoder.getFromLocation( currentTrackerResponse.data.latitude.toDouble(), currentTrackerResponse.data.longitude.toDouble(), 1)
+            val address = addresses!![0].getAddressLine(0)
+            holder.addressTv.text = address
+        }
+
 
     }
 

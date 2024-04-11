@@ -7,24 +7,24 @@
     android:layout_height="40dp"
     android:elevation="5dp"
     android:layout_marginTop="2dp"
-    android:layout_marginEnd="3dp"
+    android:layout_marginEnd="10dp"
     >
 
     <TextView
         android:id="@+id/worker_name_tv"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="7"
+        android:layout_weight="4"
         tools:text="Saibal Panja"
         android:textSize="18sp"
         android:paddingStart="10dp"
         android:paddingTop="5dp"
         />
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
         android:orientation="horizontal"
-        android:layout_weight=".5"
+        android:layout_weight="1"
 
         >
         <Button
@@ -51,8 +51,6 @@
             style="@style/Widget.Material3.Button.TextButton.Icon"
             />
     </LinearLayout>
-
-
 
 
 </LinearLayout>

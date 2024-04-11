@@ -1,39 +1,25 @@
 package com.saibal.trackeradminapplication.admin
 
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentContainer
-import androidx.navigation.findNavController
 import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.gson.Gson
 
 import com.saibal.trackeradminapplication.R
 import com.saibal.trackeradminapplication.admin.ui.DashboardFragment
 import com.saibal.trackeradminapplication.admin.ui.MoreOptionsFragment
-import com.saibal.trackeradminapplication.admin.ui.WorkerFragment
 import com.saibal.trackeradminapplication.admin.ui.WorkersFragment
 import com.saibal.trackeradminapplication.common.Utill
-import com.saibal.trackeradminapplication.controller.TrackerAdapter
 import com.saibal.trackeradminapplication.model.Admin
-import com.saibal.trackeradminapplication.model.TrackerResponse
-import com.saibal.trackeradminapplication.model.Worker
-import org.json.JSONArray
-import org.json.JSONException
-import org.json.JSONObject
 
 
 class PanelActivity : AppCompatActivity() {
